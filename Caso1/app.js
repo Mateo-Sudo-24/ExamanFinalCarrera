@@ -31,6 +31,12 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Endpoint no encontrado.' });
 });
 
+//Railway extencion
+process.on('SIGTERM', () => {
+  console.log('SIGTERM recibido, cerrando servidor...');
+  process.exit(0);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0' ,() => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
