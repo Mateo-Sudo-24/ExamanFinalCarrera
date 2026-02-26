@@ -22,6 +22,11 @@ const materiaSchema = new mongoose.Schema({
   creditos: {
     type: String,
     maxlength: [10, 'Los créditos no pueden superar 10 caracteres']
+  },
+  id_usuario: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Usuario',
+  required: true
   }
 }, { timestamps: true });
 
