@@ -1,17 +1,17 @@
 const Matricula = require('../models/matricula.js');
-const Estudiante = require('../models/estudiantes.js');
+const Usuario = require('../models/usuario.js');
 const Materia = require('../models/materia.js');
 
 const obtenerMatriculas = async () => {
   return await Matricula.find()
-    .populate('id_estudiante', 'nombre apellido cedula email')
+    .populate('id_usuario', 'nombre apellido cedula email')
     .populate('id_materia', 'nombre codigo creditos')
     .sort({ createdAt: -1 });
 };
 
 const obtenerMatriculaPorId = async (id) => {
   const matricula = await Matricula.findById(id)
-    .populate('id_estudiante', 'nombre apellido cedula email')
+    .populate('id_usuario', 'nombre apellido cedula email')
     .populate('id_materia', 'nombre codigo creditos');
   if (!matricula) throw new Error('Matrícula no encontrada.');
   return matricula;
