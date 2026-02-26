@@ -2,7 +2,7 @@ const service = require('../services/materiaService');
 
 const getAll = async (req, res) => {
   try {
-    const data = await service.obtenerMaterias(req.user._id);
+    const data = await service.obtenerMaterias(req.user.id);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
