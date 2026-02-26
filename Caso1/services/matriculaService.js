@@ -21,8 +21,8 @@ const crearMatricula = async (datos) => {
   const { codigo, id_usuario, id_materia } = datos;
 
   // Verificar existencia
-  const estudianteExiste = await Usuario.findById(id_usuario);
-  if (!estudianteExiste) throw new Error('El usuario no existe.');
+  const usuarioExiste = await Usuario.findById(id_usuario);
+  if (!usuarioExiste) throw new Error('El usuario no existe.');
 
   const materiaExiste = await Materia.findById(id_materia);
   if (!materiaExiste) throw new Error('La materia no existe.');
