@@ -2,7 +2,7 @@ const service = require('../services/matriculaService');
 
 const getAll = async (req, res) => {
   try {
-    const data = await service.obtenerMatriculas();
+    const data = await service.obtenerMatriculas(req.query);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });

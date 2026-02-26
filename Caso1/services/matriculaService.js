@@ -18,25 +18,25 @@ const obtenerMatriculaPorId = async (id) => {
 };
 
 const crearMatricula = async (datos) => {
-  const { codigo, id_estudiante, id_materia } = datos;
+  const { codigo, id_usuario, id_materia } = datos;
 
   // Verificar existencia
-  const estudianteExiste = await Estudiante.findById(id_estudiante);
-  if (!estudianteExiste) throw new Error('El estudiante no existe.');
+  const estudianteExiste = await Usuario.findById(id_usuario);
+  if (!estudianteExiste) throw new Error('El usuario no existe.');
 
   const materiaExiste = await Materia.findById(id_materia);
   if (!materiaExiste) throw new Error('La materia no existe.');
 
-  // Evitar matrícula duplicada (mismo estudiante + materia)
-  const duplicada = await Matricula.findOne({ id_estudiante, id_materia });
-  if (duplicada) throw new Error('El estudiante ya está matriculado en esta materia.');
+  // Evitar matrícula duplicada (mismo usuario + materia)
+  const duplicada = await Matricula.findOne({ id_usuario, id_materia });
+  if (duplicada) throw new Error('El usuario ya está matriculado en esta materia.');
 
   const codigoExiste = await Matricula.findOne({ codigo });
   if (codigoExiste) throw new Error('Ya existe una matrícula con ese código.');
 
   const matricula = await Matricula.create(datos);
   return await matricula.populate([
-    { path: 'id_estudiante', select: 'nombre apellido cedula email' },
+    { path: 'id_usuario', select: 'nombre apellido cedula email' },
     { path: 'id_materia', select: 'nombre codigo creditos' }
   ]);
 };
